@@ -48,9 +48,12 @@ time_vector = (0:length(audio_data)-1) / sample_rate;
 %axis tight;
 
 % -------------------------------- Custom paramters --------------------------------
-lowpass_cutoff = 2000;  % Adjust the cutoff frequency as needed
+lowpass_cutoff = 1000;  % Adjust the cutoff frequency as needed
 highpass_cutoff = 300;   % High-pass cutoff frequency in Hz
-filter_order = 101;       % Adjust the filter order as needed
+filter_order = 1001;       % Adjust the filter order as needed
+
+% Define the gain factor (amplification factor)
+gain_factor = 1.5; % Adjust this value as needed
 
 % -------------------------------- Design a low-pass filter --------------------------------
 
@@ -80,6 +83,17 @@ bandpass_filter_coefficients = fir1(filter_order, normalized_highpass_cutoff, 'h
 
 % Apply the band-pass filter to the audio data
 band_filtered_audio = filter(bandpass_filter_coefficients, 1, lowpass_filtered_audio);
+
+% -------------------------------- Amplification -------------------------
+
+% Apply the gain factor to the low-pass filtered audio
+lowpass_filtered_audio = lowpass_filtered_audio * gain_factor;
+
+% Apply the gain factor to the high-pass filtered audio
+highpass_filtered_audio = highpass_filtered_audio * gain_factor;
+
+% Apply the gain factor to the band-pass filtered audio
+band_filtered_audio = band_filtered_audio * gain_factor;
 
 % -------------------------------- Plot the FFT -------------------------
 
@@ -240,14 +254,15 @@ audiowrite(fullfile(script_directory, strcat(output_file_path, 'highpass_filtere
 % Save the band-pass filtered audio
 disp('Saving band-pass filtered audio...');
 audiowrite(fullfile(script_directory, strcat(output_file_path, 'bandpass_filtered_audio.ogg')), band_filtered_audio, sample_rate);
-
 % -------------------------------- Configurations -------------------------
 
 % Close all on figures on exit
 % Set up a callback function to close all figures when the main figure is closed
 % Callback function to close all figures
 function close_all_figures(main_figure)
-    % exit();
-    close all force;
-    % exit;
+    # exit();
+    # close all force;
+    exit;
 end
+
+pause;

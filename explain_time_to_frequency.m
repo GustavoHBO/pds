@@ -1,7 +1,7 @@
 % Parameters for the sinusoidal signals
-frequencies = [1000, 2000, 3000]; % Frequencies in Hz
-duration = 0.01;     % Duration in seconds
-sample_rate = 48000; % Sample rate in Hz
+frequencies = [1000]; % Frequencies in Hz
+duration = 0.005;     % Duration in seconds
+sample_rate = 2000; % Sample rate in Hz
 
 % Time vector
 time_vector = (0:1/sample_rate:duration-1/sample_rate);
@@ -16,7 +16,7 @@ end
 sum_signal = sum(sinusoidal_signals, 2);
 
 % Plot the individual sinusoidal signals in the time domain
-figure;
+figure('CloseRequestFcn', @(src, event) close_all_figures());
 for i = 1:length(frequencies)
     subplot(length(frequencies)+1, 2, (i-1)*2+1);
     plot(time_vector, sinusoidal_signals(:, i));
@@ -62,3 +62,13 @@ grid on;
 % Adjust subplot layout
 title('Multiple Sinusoidal Signals and Their Fourier Perspective');
 
+% Close all on figures on exit
+% Set up a callback function to close all figures when the main figure is closed
+% Callback function to close all figures
+function close_all_figures(main_figure)
+    # exit();
+    # close all force;
+    exit;
+end
+
+pause;
