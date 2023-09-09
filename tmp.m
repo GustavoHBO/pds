@@ -1,19 +1,25 @@
-% Parâmetros do filtro ideal
-frequencia_de_corte = 1000; % Frequência de corte em Hz
-taxa_de_amostragem = 5000; % Taxa de amostragem em Hz
-ordem_do_filtro = 100; % Ordem do filtro
+% Crie um sinal de exemplo no domínio da frequência
+fs = 1000; % Taxa de amostragem (Hz)
+t = 0:1/fs:1; % Vetor de tempo de 0 a 1 segundo
+f1 = 5; % Frequência da primeira senoide (Hz)
+f2 = 20; % Frequência da segunda senoide (Hz)
+sinal_no_tempo = sin(2*pi*f1*t) + sin(2*pi*f2*t); % Sinal composto de duas senoides no domínio do tempo
 
-% Crie um vetor de frequências correspondentes à resposta do filtro
-frequencias = linspace(0, taxa_de_amostragem, 1000);
+% Calcule a FFT do sinal no domínio da frequência
+sinal_no_frequencia = fft(sinal_no_tempo);
 
-% Crie a resposta em frequência do filtro ideal (passa-baixa)
-filtro_ideal = zeros(size(frequencias));
-filtro_ideal(frequencias <= frequencia_de_corte) = 1;
+% Realize a IFFT para recuperar o sinal no domínio do tempo
+sinal_reconstruido = ifft(sinal_no_frequencia);
 
-% Plote a resposta em frequência do filtro ideal
-plot(frequencias, filtro_ideal);
-title('Resposta em Frequência do Filtro Passa-Baixa Ideal');
-xlabel('Frequência (Hz)');
-ylabel('Magnitude');
+% Plote o sinal original e o sinal reconstruído
+subplot(2, 1, 1);
+plot(t, sinal_no_tempo);
+title('Sinal Original no Domínio do Tempo');
+xlabel('Tempo (s)');
+ylabel('Amplitude');
 
-% A resposta em frequência será uma caixa (1 para frequências abaixo da frequência de corte e 0 para frequências acima dela).
+subplot(2, 1, 2);
+plot(t, sinal_reconstruido);
+title('Sinal Reconstruído a partir da IFFT');
+xlabel('Tempo (s)');
+ylabel('Amplitude');
