@@ -1,0 +1,152 @@
+This is LuaTeX, Version 1.14.0 (TeX Live 2022/dev/Debian)  (format=dvilualatex 2023.9.11)  11 SEP 2023 15:10
+ restricted system commands enabled.
+**/home/gntwo/Workspace/pds/relatorio/bare_jrnl.tex
+(/home/gntwo/Workspace/pds/relatorio/bare_jrnl.tex
+LaTeX2e <2021-11-15> patch level 1
+Lua module: luaotfload 2021-05-21 3.18 Lua based OpenType font support
+Lua module: lualibs 2021-05-20 2.74 ConTeXt Lua standard libraries.
+Lua module: lualibs-extended 2021-05-20 2.74 ConTeXt Lua libraries -- extended c
+ollection.
+luaotfload | conf : Root cache directory is "/home/gntwo/.texlive2021/texmf-var/
+luatex-cache/generic/names".
+luaotfload | init : Loading fontloader "fontloader-2021-05-20.lua" from kpse-res
+olved path "/usr/share/texlive/texmf-dist/tex/luatex/luaotfload/fontloader-2021-
+05-20.lua".
+Lua-only attribute luaotfload@noligature = 1
+Lua-only attribute luaotfload@syllabe = 2
+luaotfload | init : Context OpenType loader version 3.116
+Inserting `luaotfload.node_processor' at position 1 in `pre_linebreak_filter'.
+Inserting `luaotfload.node_processor' at position 1 in `hpack_filter'.
+Inserting `luaotfload.glyph_stream' at position 1 in `glyph_stream_provider'.
+Inserting `luaotfload.define_font' at position 1 in `define_font'.
+Lua-only attribute luaotfload_color_attribute = 3
+luaotfload | conf : Root cache directory is "/home/gntwo/.texlive2021/texmf-var/
+luatex-cache/generic/names".
+Lua-only attribute luaotfload.letterspace_done = 4
+Inserting `luaotfload.aux.set_sscale_dimens' at position 1 in `luaotfload.patch_
+font'.
+Inserting `luaotfload.aux.set_font_index' at position 2 in `luaotfload.patch_fon
+t'.
+Inserting `luaotfload.aux.patch_cambria_domh' at position 3 in `luaotfload.patch
+_font'.
+Inserting `luaotfload.aux.fixup_fontdata' at position 1 in `luaotfload.patch_fon
+t_unsafe'.
+Inserting `luaotfload.aux.set_capheight' at position 4 in `luaotfload.patch_font
+'.
+Inserting `luaotfload.aux.set_xheight' at position 5 in `luaotfload.patch_font'.
+Inserting `luaotfload.rewrite_fontname' at position 6 in `luaotfload.patch_font'
+. L3 programming layer <2022-01-21>
+Inserting `tracingstacklevels' at position 1 in `input_level_string'. (./IEEEtr
+an.cls
+Document Class: IEEEtran 2002/08/13 revision V1.6 by Michael Shell
+-- See the "IEEEtran_HOWTO" manual for usage information.
+-- The source comments contain changelog notes.
+\@IEEEtrantmpdimenA=\dimen137
+\@IEEEtrantmpdimenB=\dimen138
+\@IEEEtrantmpcountA=\count183
+\@IEEEtrantmpcountB=\count184
+\@IEEEtrantmptoksA=\toks16
+LaTeX Font Info:    Trying to load font information for TU+ptm on input line 69
+2.
+LaTeX Font Info:    No file TUptm.fd. on input line 692.
+
+LaTeX Font Warning: Font shape `TU/ptm/m/n' undefined
+(Font)              using `TU/lmr/m/n' instead on input line 692.
+
+luaotfload | db : Font names database not found, generating new one.
+luaotfload | db : This can take several minutes; please be patient.
+luaotfload | db : Unknown format: "", skipping.
+-- This is a 10 point document.
+\normalsizebaselineskip=\skip47
+\normaljot=\skip48
+
+LaTeX Font Warning: Font shape `TU/ptm/bx/n' undefined
+(Font)              using `TU/ptm/m/n' instead on input line 990.
+
+
+LaTeX Font Warning: Font shape `TU/ptm/m/it' undefined
+(Font)              using `TU/ptm/m/n' instead on input line 990.
+
+
+LaTeX Font Warning: Font shape `TU/ptm/bx/it' undefined
+(Font)              using `TU/ptm/bx/n' instead on input line 990.
+
+\IEEEilabelindentA=\dimen139
+\IEEEilabelindentB=\dimen140
+\IEEEilabelindent=\dimen141
+\IEEEelabelindent=\dimen142
+\IEEEdlabelindent=\dimen143
+\labelindent=\dimen144
+\IEEEiednormlabelsep=\dimen145
+\IEEEiedmathlabelsep=\dimen146
+\IEEEiedtopsep=\skip49
+\c@section=\count185
+\c@subsection=\count186
+\c@subsubsection=\count187
+\c@paragraph=\count188
+\c@IEEEsubequation=\count189
+\abovecaptionskip=\skip50
+\belowcaptionskip=\skip51
+\c@figure=\count190
+\c@table=\count191
+\@IEEEeqnnumcols=\count192
+\@IEEEeqncolcnt=\count193
+\@IEEEtmpitemindent=\dimen147
+\c@biography=\count194
+\@IEEEtranrubishbin=\box50
+) (/usr/share/texlive/texmf-dist/tex/generic/babel/babel.sty
+Package: babel 2022/01/26 3.70 The Babel package
+
+(/usr/share/texlive/texmf-dist/tex/generic/babel/luababel.def
+\bbl@readstream=\read2
+\l@dumylang=\language2
+Package babel Info: Non-standard hyphenation setup on input line 118.
+\l@nohyphenation=\language3
+\babelcatcodetablenum=\catcodetable12
+\bbl@pattcodes=\catcodetable13
+)
+\babel@savecnt=\count195
+\U@D=\dimen148
+\l@unhyphenated=\language4
+
+(/usr/share/texlive/texmf-dist/tex/generic/babel/luababel.def
+\bbl@attr@locale=\attribute5
+)
+(/usr/share/texlive/texmf-dist/tex/generic/babel-english/english.ldf
+Language: english 2017/06/06 v3.3r English support from the babel system
+Package babel Info: Hyphen rules for 'british' set to \l@english
+(babel)             (\language0). Reported on input line 82.
+Package babel Info: Hyphen rules for 'UKenglish' set to \l@english
+(babel)             (\language0). Reported on input line 83.
+Package babel Info: Hyphen rules for 'canadian' set to \l@english
+(babel)             (\language0). Reported on input line 102.
+Package babel Info: Hyphen rules for 'australian' set to \l@english
+(babel)             (\language0). Reported on input line 105.
+Package babel Info: Hyphen rules for 'newzealand' set to \l@english
+(babel)             (\language0). Reported on input line 108.
+)
+
+! Package babel Error: Unknown option 'portuguese'. Either you misspelled it
+(babel)                or the language definition file portuguese.ldf was not f
+ound.
+
+See the babel package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.4254 \ProcessOptions*
+                     
+
+Here is how much of LuaTeX's memory you used:
+ 1735 strings out of 477800
+ 100000,383344 words of node,token memory allocated
+ 398 words of node memory still in use:
+   2 hlist, 1 rule, 1 dir, 3 kern, 1 glyph, 3 attribute, 51 glue_spec, 3 attribu
+te_list, 4 if_stack, 1 write nodes
+   avail lists: 2:8,3:2,4:1,5:2,7:2,9:4
+ 22500 multiletter control sequences out of 65536+600000
+ 34 fonts using 3235151 bytes
+ 40i,0n,51p,272b,164s stack positions out of 5000i,500n,10000p,200000b,80000s
+!  ==> Fatal error occurred, bad output DVI file produced!
+No pages of output.
+
