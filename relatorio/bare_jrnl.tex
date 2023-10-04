@@ -1,4 +1,4 @@
-\documentclass[journal]{IEEEtran}
+\documentclass[]{IEEEtran}
 
 \usepackage[english,portuguese]{babel}
 \renewcommand{\IEEEkeywordsname}{Palavras-chave}
@@ -78,46 +78,47 @@ A equação (\ref{eq:produtotremdeimpulsos}) representa a expressão matemática
 
 \subsection{Efeito da subamostragem: Aliasing}
 
-A escolha da frequência de amostragem é um ponto importante ao amostrar um sinal contínuo, pois pode acabar comprometendo a sua reconstrução. Caso a frequência de amostragem não seja suficientemente alta, ocorre uma sobreposição de espectros consecutivos durante o fenômeno da replicação do espectro do sinal, \cite{Oppenheim} \cite{alan}. 
+\subsubsection{Aliasing}
 
-Uma forma de evitar o efeito, caso a frequência de amostragem não obedeça o teorema de Nyquist, é a implementação de um filtro passa-baixas localizado antes da discretização do sinal, limitando assim a máxima frequência do sinal à metade da frequência de amostragem. Este filtro é chamado de filtro anti-aliasing \cite{alan}.
+A escolha da frequência de amostragem é um ponto importante ao amostrar um sinal contínuo, pois pode acabar comprometendo a sua reconstrução. Caso a frequência de amostragem não seja suficientemente alta, ocorre uma sobreposição de espectros durante o fenômeno de replicação da faixa de frequência original do sinal.
 
 \subsubsection{Filtro passa-baixas}
-Na maioria das vezes quando um sinal de frequência é recebido para o processamento e analise a sua informação está contida em uma faixa de frequência com extensão finita, sendo assim, há a necessidade de um sistema que possa fazer a seleção da frequência limitando o seu espectro a faixa que é desejada, esse processo é feito através de filtros digitais \cite{haykin}.
 
-Os filtros digitais são caracterizados por limitar uma faixa de passagem do sinal rejeitando outra parte. Haykin e Veen em sua obra definem \cite{haykin} que:
+Na maioria das vezes quando um sinal de frequência é recebido para o processamento e análise, a sua informação está contida em uma faixa de frequência com extensão finita, sendo assim, há a necessidade de um sistema que possa fazer a seleção da frequência, limitando o seu espectro à faixa que desejada. Este processo é feito através de filtros.
+
+Os filtros são caracterizados por limitar uma faixa de passagem do sinal rejeitando outra parte. Haykin e Veen em sua obra definem que:
 
 \begin{quote}
-    "Sinais com frequências dentro da faixa de passagem, são transmitidos com pouca ou nenhuma distorção, ao passo que aqueles que têm frequências dentro da faixa de rejeição ão efetivamente rejeitados".
+    "Sinais com frequências dentro da faixa de passagem, são transmitidos com pouca ou nenhuma distorção, ao passo que aqueles que têm frequências dentro da faixa de rejeição são efetivamente rejeitados".
 \end{quote}
 
-O filtro passa-baixas ideal permite a transmissão de baixas frequências atenuando a amplitude que sejam maior que a sua frequência limite, conhecida como frequência de corte. Considerando o ambiente como ideal o ganho do filtro é unitário, ou seja o módulo do sinal de entrada é igual a sua saída, e para frequência acima de sua frequência de corte o sinal é atenuado a zero. Porém esse tipo de resposta não é obtido na prática \cite{Fernando}.
+O filtro passa-baixas ideal permite a transmissão de baixas frequências atenuando a amplitude que sejam maior que a sua frequência limite, conhecida como frequência de corte. Considerando o ambiente como ideal, o ganho do filtro é unitário, ou seja o módulo do sinal de entrada é igual a sua saída, e para frequência acima de sua frequência de corte, o sinal é atenuado a zero. Porém, este tipo de resposta não é obtido na prática.
 
 \subsubsection{Teorema de Nyquist-Shannon}
 
-Pelo teorema de Nyquist para que um sinal analógico limitado em banda, seja completamente reconstruído a partir de uma sequenciaa finita de amostras é necessária que sua taxa de amostragem seja pelo menos duas vezes maior a sua frequência máxima tal como mostra a equação (\ref{eq:nyquist}) \cite{alan}.
+Pelo teorema de Nyquist, para que um sinal contínuo limitado em banda seja completamente reconstruído a partir de uma sequência finita de amostras, é necessária que sua taxa de amostragem seja pelo menos duas vezes maior que a frequência máxima do sinal tal como mostra a equação (\ref{eq:nyquist}):
 
 \begin{equation}\label{eq:nyquist}
     \omega_{m} > 2 \cdot \omega_{s}
 \end{equation}
 
-Esse critério é dado pois as replicas do sinal podem causar a sobreposição dos espectros como citado anteriormente, provocando o efeito de \textit{aliasing}, impedindo assim a reconstrução do sinal inicial \cite{alan}.
+Esse critério é dado pois as rélicas do sinal podem causar a sobreposição dos espectros como citado anteriormente, provocando o efeito de \textit{aliasing}, impedindo assim a reconstrução do sinal inicial. Uma forma de evitar este efeito, caso a frequência de amostragem não obedeça o teorema de Nyquist, é a partir da implementação de um filtro passa-baixas localizado antes da discretização do sinal, limitando a máxima frequência à metade da frequência de amostragem. Este filtro é chamado de filtro \textit{anti-aliasing}.
 
-\subsubsection{Transformada de Fourier}
-Uma das maneiras de analisar os sinais no espectro da frequência é utilizando a transformada de Fourier. Essa ferramenta permite que possamos, matematicamente, decompor o sinal do tempo e observar as suas componentes na frequência\cite{brigham1988fast}. A Transformada de Fourier de um sinal $x(t)$ é dada por:
+\subsection{Transformada de Fourier}
+Uma das maneiras de analisar os sinais no espectro da frequência é utilizando a transformada de Fourier. Essa ferramenta permite que possamos, matematicamente, decompor o sinal do tempo e observar as suas componentes na frequência. A Transformada de Fourier de um sinal $x(t)$ é dada por:
 
 \begin{equation}
      X(f) = \int_{-\infty}^{\infty} x(t) e^{-j2\pi ft} dt
 \end{equation}
 onde \(X(f)\) é o espectro de frequência do sinal e \(f\) é a frequência.
 
-Uma vez que já possuímos o sinal discretizado, decompô-lo na frequência pode ficar mais viável utilizando-se da \textit{Transformada Rápida de Fourier} (FFT)\cite{brigham1988fast}. Essa, por sua vez, é dada por:
+Uma vez que já possuímos o sinal discretizado, decompô-lo na frequência pode ficar mais viável utilizando-se da \textit{Transformada Rápida de Fourier} (FFT). Essa, por sua vez, é dada por:
 \begin{equation}
     X(k) = \sum_{n=0}^{N-1} x(n) e^{-j2\pi kn/N} 
 \end{equation}
 onde \(X(k)\) representa o espectro de frequência discreto, \(x(n)\) são as amostras do sinal e \(N\) é o número de amostras.
 
-Ainda no âmbito discreto, é possível, a partir das componentes de frequência, reconstruir o sinal no tempo. Para tal é preciso fazer o caminho inverso da transformada de Fourier e esse é o papel da \textit{Transformada Rápida Inversa de Fourier} (IFFT)\cite{brigham1988fast}. A IFFT é definida como:
+Ainda no âmbito discreto, é possível, a partir das componentes de frequência, reconstruir o sinal no tempo. Para tal é preciso fazer o caminho inverso da transformada de Fourier. Este é o papel da \textit{Transformada Rápida Inversa de Fourier} (IFFT). A IFFT é definida como:
 \begin{equation}
     x(n) = \frac{1}{N} \sum_{k=0}^{N-1} X(k) e^{j2\pi kn/N}
 \end{equation}
@@ -177,7 +178,7 @@ Quanto maior for a largura do pulso, mais informação do sinal original ele fil
 
 \subsubsection{Retornando para o domínio do tempo}
 
-Após filtrar o sinal, basta retornar para o domínio do tempo. Para isto, utiliza-se a transformada rápida inversa de fourier$^{[5]}$, cujo comando no Octave é {\fontfamily{pcr}\selectfont ifft}. Uma vez que o sinal de entrada filtrado $x$$_f$$(t)$ é reconstruído, o resultado gráfico no tempo deve ser semelhante a curva senoidal correspondente à frequência filtrada. Além disso, o processo de filtragem também gera atenuação na amplitude do sinal, portanto é necessário fazer uma amplificação no sinal $x$$_f$$(t)$ para uma melhor aproximação a senóide desejada.
+Após filtrar o sinal, basta retornar para o domínio do tempo. Para isto, utiliza-se a transformada rápida inversa de fourier$^{[5]}$, cujo comando no Octave é {\fontfamily{pcr}\selectfont ifft}. Uma vez que o sinal de entrada filtrado $x$$_f$$(t)$ é reconstruído, o resultado gráfico no tempo deve ser semelhante a curva senoidal correspondente à frequência filtrada. Além disso, o processo de filtragem e reconstrução gera atenuação na amplitude do sinal, portanto é necessário fazer uma amplificação no sinal $x$$_f$$(t)$ para uma melhor aproximação a senóide desejada.
 
 \begin{figure}[H]
 \captionsetup{justification=centering}
@@ -202,7 +203,7 @@ Seguindo a ordem estabelecida pelo diagrama, tem-se, enfim, o sinal filtrado$^{[
 \subsubsection{Replicação dos espectros}
 
 Uma vez obtido o sinal amostrado$^{[8]}$ $x$$_s$$(t)$, deve-se novamente utilizar a FFT$^{[9]}$ para obter $X$$_s$$(\omega)$, e é neste ponto que ocorre o fenômeno da replicação dos espectros. Como a amostragem não é feita com impulsos ideais, as réplicas também não são ideias. Dessa forma, suas amplitudes são gradativamente atenuadas tendendo à zero.
-\onehalfspacing
+
 \begin{figure}[H]
 \captionsetup{justification=centering}
 \centering % para centralizarmos a figura
@@ -238,7 +239,7 @@ Por fim, basta aplicar IFFT$^{[12]}$ em $X$$_s$$(\omega)$ filtrado para reconstr
 
 \subsection{Aliasing}
 
-Vamos tomar como exemplo um sinal $x(t)$ formado pela soma de três senoides com frequências $w_1$ = 10 Hz, $w_2$ = 50 Hz e $w_3$ = 90 Hz.
+Vamos tomar como exemplo um sinal $x(t)$ formado pela soma de três senoides com frequências $w_1 = 10 Hz$, $w_2 = 50 Hz$ e $w_3 = 90 Hz$.
 
 \begin{figure}[H]
 \captionsetup{justification=centering}
@@ -247,12 +248,12 @@ Vamos tomar como exemplo um sinal $x(t)$ formado pela soma de três senoides com
 \caption{Sinal de entrada $x(t)$ formado pela soma de três senoides.}
 \end{figure}
 
-O sinal resultado possui período igual ao menor período dos sinais somados. Neste caso, $P_{min} = 0.1s$. Portanto, o sinal resultante possui período $P = 0.1s$. Apesar da entrada ter esta característica, o sinal no qual queremos trabalhar possui frequência $f = 10Hz$. Então todo e qualquer sinal fora deste período é considerado ruído. Para continuar é preciso remover esses ruídos para que eles não atrapalhem o nosso processamento. Vamos utilizar um filtro passa-baixas ideal com frequência de corte $w_c = 15Hz$, ele irá remover as frequências indesejadas deixando apenas a frequência a ser utilizada.
+O sinal resultado possui período igual ao menor período dos sinais somados. Neste caso, $P_{min} = 0.1s$. Portanto, o sinal resultante possui período $P = 0.1s$. Apesar da entrada ter esta característica, o sinal no qual queremos trabalhar possui frequência $f = 10Hz$. Então todo e qualquer sinal fora desta frequência é considerado ruído. Para continuar é preciso remover esses ruídos para que eles não atrapalhem o nosso processamento. Vamos utilizar um filtro passa-baixas ideal com frequência de corte $w_c = 15Hz$, ele irá remover as frequências indesejadas, deixando apenas a frequência a ser utilizada.
 
 \begin{figure}[H]
 \captionsetup{justification=centering}
 \centering % para centralizarmos a figura
-\includegraphics[width=6cm]{sinal_filtrado_00.jpg} % leia abaixo
+\includegraphics[width=6cm]{sinal_entrada_10Hz.png} % leia abaixo
 \caption{Sinal de entrada $x(t)$ filtrado.}
 \end{figure}
 
@@ -260,7 +261,7 @@ Agora que foi removido todo ruído, podemos amostrar o sinal. Sabendo que o teor
 
 \subsection{Amostragem e Reconstrução}
 
-Vamos utilizar um trem de pulsos retangulares com frequência $w_s = 40Hz$. Como a frequência de amostragem é maior que o dobro da frequência do sinal, não haverá \textit{aliasing}. O sinal amostrado é dado por $x_s(t) = x(t) * h(t)$, onde $h(t)$ é o trem de pulsos retangulares. O sinal amostrado é o seguinte:
+Vamos utilizar um trem de pulsos retangulares com frequência $w_s = 40Hz$. Como a frequência de amostragem é maior que o dobro da frequência do sinal, não haverá \textit{aliasing}. O sinal amostrado é dado por $x_s(t) = x(t) \cdot h(t)$, onde $h(t)$ é o trem de pulsos retangulares. O sinal amostrado é o seguinte:
 
 \begin{figure}[H]
 \captionsetup{justification=centering}
@@ -269,28 +270,29 @@ Vamos utilizar um trem de pulsos retangulares com frequência $w_s = 40Hz$. Como
 \caption{Sinal amostrado $x_s(t)$.}
 \end{figure}
 
-Olhando a frequência deste sinal, podemos observar o surgimento de frequências indesejadas, ou seja, o \textit{aliasing}.
+Olhando o espectro deste sinal podemos observar a replicação causado pela amostragem:
 
 \begin{figure}[H]
 \captionsetup{justification=centering}
 \centering % para centralizarmos a figura
-\includegraphics[width=6cm]{frequencia_sinal_amostrado_40Hz_3.png} % leia abaixo
+\includegraphics[width=6cm]{sinal_amostrado_frequencia_40Hz.png} % leia abaixo
 \caption{Frequência do sinal amostrado $F_s(t)$.}
 \end{figure}
 
-Para remover essas frequências, vamos utilizar um filtro passa-baixas ideal com frequência de corte $w_c = 15Hz$. O sinal filtrado é dado por $x_f(t) = x_s(t) * h_s(t)$, onde $h_s(t)$ é o filtro passa-baixas ideal. O sinal filtrado é o seguinte:
+Para remover essas frequências, vamos utilizar um filtro passa-baixas ideal com frequência de corte $w_c = 15Hz$. O sinal filtrado é dado por $x_f(t) = x_s(t) \cdot h_s(t)$, onde $h_s(t)$ é o filtro passa-baixas ideal(fig. \ref*{fig:filtro_reconstrucao}). O sinal filtrado é o seguinte:
 
 \begin{figure}[H]
 \captionsetup{justification=centering}
 \centering % para centralizarmos a figura
-\includegraphics[width=6cm]{filtro_reconstrucao_00.png} % leia abaixo
+\includegraphics[width=6cm]{filtro_reconstrucao.png} % leia abaixo
 \caption{Filtro de reconstrução $h_s(t)$.}
+\label{fig:filtro_reconstrucao}
 \end{figure}
 
 \begin{figure}[H]
 \captionsetup{justification=centering}
 \centering % para centralizarmos a figura
-\includegraphics[width=6cm]{frequencia_sinal_amostrado_filtrado.png} % leia abaixo
+\includegraphics[width=6cm]{sinal_amostrado_filtrado_frequencia_40Hz.png} % leia abaixo
 \caption{Frequência do sinal amostrado filtrado pelo filtro de reconstrução $h_s(t)$.}
 \end{figure}
 
@@ -299,9 +301,49 @@ Removendo as frequências indesejadas, podemos reconstruir o sinal original. Par
 \begin{figure}[H]
 \captionsetup{justification=centering}
 \centering % para centralizarmos a figura
-\includegraphics[width=6cm]{sinal_amostrado_reconstruido_40Hz.png} % leia abaixo
+\includegraphics[width=6cm]{sinal_reconstruido_40Hz.png} % leia abaixo
 \caption{Sinal reconstruído $x_r(t)$.}
 \end{figure}
+
+Para observar na prática a amostragem do sinal com uma frequência inferior a frequência de Nyquist, vamos utilizar um trem de pulsos retangulares com frequência $w_s = 5Hz$. Como a frequência de amostragem é menor que o dobro da frequência do sinal, haverá \textit{aliasing}. Vamos manter todos os outros parâmetros iguais ao exemplo anterior. Para observar apenas o efeito do \textit{aliasing}. Utilizando o trem de pulsos, o sinal amostrado é o seguinte:
+
+\begin{figure}[H]
+\captionsetup{justification=centering}
+\centering % para centralizarmos a figura
+\includegraphics[width=6cm]{sinal_amostrado_5Hz.png} % leia abaixo
+\label{fig:sinal_amostrado_5Hz}
+\caption{Sinal amostrado $5Hz$.}
+\end{figure}
+
+O legal de utilizar a frequência de amostragem a metade do sinal de entrada é poder observar o efeito do \textit{aliasing}, na figura \ref{fig:sinal_amostrado_5Hz}, vemos que metade do sinal é perdido. Olhando o espectro deste sinal podemos observar a replicação causado pela amostragem, o cenário seria ainda pior se o sinal original tivesse mais frequências, eles também seriam replicados. E observando na frequência, mesmo que apliquemos o filtro de reconstrução, não vamos conseguir remover os espectros indesejados, pois eles estão sobrepostos.
+
+\begin{figure}[H]
+\captionsetup{justification=centering}
+\centering % para centralizarmos a figura
+\includegraphics[width=6cm]{sinal_amostrado_filtrado_frequencia_5Hz.png} % leia abaixo
+\caption{Sinal amostrado filtrado na frequência $5Hz$.}
+\end{figure}
+
+Reconstruindo o sinal, podemos observar que o sinal reconstruído não é igual ao sinal original, pois o sinal original foi perdido durante a amostragem. Observando o sinal reconstruído, notamos que é um sinal completamente diferente do sinal de entrada.
+
+\begin{figure}[H]
+\captionsetup{justification=centering}
+\centering % para centralizarmos a figura
+\includegraphics[width=6cm]{sinal_reconstruido_5Hz.png} % leia abaixo
+\caption{Sinal amostrado reconstruído $5Hz$.}
+\end{figure}
+
+Agora comparando lado a lado, o sinal reconstruído e o sinal original de entrada na figura \ref{fig:comparacao_5H_sinal_original} em azul e vermelho, respectivamente, observamos o efeito da amostragem na amplitude, causado pela sobreposição dos espectros.
+
+\begin{figure}[H]
+\captionsetup{justification=centering}
+\centering % para centralizarmos a figura
+\includegraphics[width=6cm]{comparacao_5H_sinal_original.png} % leia abaixo
+\label{fig:comparacao_5H_sinal_original}
+\caption{Comparação do sinal reconstruído $5Hz$ e o sinal de entrada $10Hz$.}
+\end{figure}
+
+Utilizar esse sinal para o transporte de informações não seria uma opção, pois todo sinal é corrompido e o processamento digital deste sinal não iria obter sucesso.
 
 \section{Conclusão}
 

@@ -5,7 +5,7 @@ freq_nyquist_fraction = 0.5; % Fraction of Nyquist frequency
 frequencies = [10, 50, 90]; % Frequencies of signals (in Hz)
 amplitudes = [1, 1, 1]; % Amplitudes of signals
 %orders = [2, 2, 2]; % Order of filters
-order = 10; % Order of filter
+order = 2; % Order of filter
 cutoffs = 25; % Cutoff frequency of filter
 
 min_frequecy = min(frequencies);
@@ -128,7 +128,7 @@ ylabel('Amplitude');
 
 subplot(3, 1, 2);
 fft_summed_signal_filtrado = fft(sinal_filtrado);
-frequencies_fft_summed_signal_filtrado = linspace(0, Fs, length(fft_summed_signal_filtrado));
+frequencies_fft_summed_signal_filtrado = filter(a, b, fft_summed_signal_filtrado);
 stem(frequencies_fft_summed_signal_filtrado, abs(fft_summed_signal_filtrado), '.');
 title('FFT of Summed Signal');
 xlabel('Frequency (Hz)');
@@ -151,16 +151,12 @@ xlabel('Time (s)');
 ylabel('Amplitude');
 
 subplot(3, 1, 2);
-figure('CloseRequestFcn', @(src, event) close_all_figures());
-
 fft_summed_signal = fft(summed_signal);
 frequencies_fft_summed_signal = linspace(0, Fs, length(fft_summed_signal));
-stem(frequencies_fft_summed_signal, abs(fft_summed_signal), '.');
+stem(abs(fftshift(fft_summed_signal)), '.');
 title('FFT of Summed Signal');
 xlabel('Frequency (Hz)');
 ylabel('Magnitude');
-
-figure('CloseRequestFcn', @(src, event) close_all_figures());
 
 subplot(3, 1, 3);
 fft_summed_signal = ifft(fft(summed_signal));

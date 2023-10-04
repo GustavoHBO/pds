@@ -103,8 +103,8 @@ stem(fre2, abs(fftshift(fft_ys)), '.', 'LineWidth', 1.5);
 axis([-5 5]);
 xlabel('Frequência (Hz)', 'FontSize', 25);
 ylabel('Amplitude', 'FontSize', 25);
-title('Sinal amostrado na frequência', 'FontSize', 25);
 legend('Sinal amostrado na frequência', 'FontSize', 25);
+title('Sinal amostrado na frequência', 'FontSize', 25);
 
 
 hold off;
