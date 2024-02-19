@@ -1,5 +1,11 @@
+% Carregando pacotes necessários
+pkg load signal;
+
+% Parametros
+audio_file = '/home/gntwo/Downloads/4000.wav';
+
 % Carregar o áudio
-[y, fs] = audioread('/home/gntwo/Downloads/4000.wav');
+[y, fs] = audioread(audio_file);
 
 % Verificar se o sinal é estéreo
 if size(y, 2) > 1
