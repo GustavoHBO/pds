@@ -4,6 +4,7 @@ pkg load signal;
 % Parametros
 fs = 44100; % Taxa de amostragem (Hz)
 duration = 1; % Duração da gravação (segundos)
+qtn_periodos_exibir = 2;
 
 
 % Parâmetros do filtro
@@ -38,19 +39,56 @@ while true
     end
     
     % Aplicar o filtro ao sinal
-    y = filter(b, 1, y);
+    %y = filter(b, 1, y);
     
     % Exibir o espectrograma
     window_length = round(fs * 0.03); % Comprimento da janela em amostras (30 ms)
     overlap_length = round(window_length * 0.5); % Sobreposição entre janelas (50%)
-    nfft = 1024; % Número de pontos da FFT
+    nfft = 16000; % Número de pontos da FFT
 
-    %figure;
+    subplot(4, 1, 1);
     specgram(y, nfft, fs, window_length, overlap_length);
     xlabel('Tempo (s)');
     ylabel('Frequência (Hz)');
     title('Espectrograma');
     colorbar; % Adiciona uma barra de cores
     
-    pause(0.1); % Aguardar 1 segundo antes da próxima gravação
+    fft_audio = fft(y);
+    % Calcular o vetor de frequências correspondentes
+    N = length(y); % Número de amostras no sinal
+    frequencies = (0:N-1) * (fs / N);
+    subplot(4, 1, 2);
+    % Plotar o espectro de frequência
+    %plot(frequencies, abs(fft_audio));
+    stem(frequencies, abs(fftshift(fft_audio)), '.');
+    xlabel('Frequência (Hz)');
+    ylabel('Magnitude');
+    title('Espectro de Frequência do Sinal de Áudio em Tempo Real');
+    
+    % Plotar o sinal de áudio
+    t = (0:length(y)-1) / fs; % Vetor de tempo
+    subplot(4, 1, 3);
+    plot(t, y);
+    xlabel('Tempo (s)');
+    ylabel('Amplitude');
+    title('Sinal de Áudio');
+    
+    % Encontrar a maior frequência presente no sinal
+    [~, max_index] = max(abs(fft_audio));
+    max_frequency = frequencies(max_index);
+    period_samples = qtn_periodos_exibir * round(fs / max_frequency);
+    
+    % Exibir apenas o primeiro período do sinal
+    y_period = y(1:period_samples);
+    t_period = (0:length(y_period)-1) / fs; % Vetor de tempo
+    subplot(4, 1, 4);
+    plot(t_period, y_period);
+    xlabel('Tempo (s)');
+    ylabel('Amplitude');
+    title('Primeiro Período do Sinal de Áudio');
+    
+    % Adicionar o valor da frequência à figura
+    text(0.5, 0.9, sprintf('Frequência encontrada: %.2f Hz', max_frequency), 'Color', 'red', 'FontSize', 12, 'HorizontalAlignment', 'center', 'Units', 'normalized');
+    
+    pause(1); % Aguardar 1 segundo antes da próxima gravação
 end
