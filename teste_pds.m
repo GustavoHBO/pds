@@ -4,8 +4,8 @@ pkg load signal;
 % Parametros
 fs = 44100; % Taxa de amostragem (Hz)
 duration = 1; % Duração da gravação (segundos)
-qtn_periodos_exibir = 2;
-
+qtn_periodos_exibir = 2; % Quantidade de períodos a serem exibidos no último gráfico
+audio_file = '/home/gntwo/Downloads/4000.wav'; % Endereço do áudio
 
 % Parâmetros do filtro
 fs = 44100; % Taxa de amostragem (Hz)
@@ -32,6 +32,9 @@ while true
     % Obter os dados gravados
     y = getaudiodata(recorder);
     
+    % Carregar o áudio
+    [y, fs] = audioread(audio_file);
+    
     % Verificar se o sinal é estéreo
     if size(y, 2) > 1
         % Converter para sinal mono (média dos canais)
@@ -46,12 +49,21 @@ while true
     overlap_length = round(window_length * 0.5); % Sobreposição entre janelas (50%)
     nfft = 16000; % Número de pontos da FFT
 
+    [S, F, T] = specgram(y, nfft, fs, window_length, overlap_length);
+    
+    % Limitar a exibição do espectrograma em uma determinada faixa de frequência
+    f_min = 0; % Frequência mínima
+    f_max = 5000; % Frequência máxima
+    f_min_index = find(F <= f_min, 1, 'last'); % Índice correspondente à frequência mínima
+    f_max_index = find(F >= f_max, 1, 'first'); % Índice correspondente à frequência máxima
+    
     subplot(4, 1, 1);
-    specgram(y, nfft, fs, window_length, overlap_length);
+    imagesc(T, F(f_min_index:f_max_index), 10*log10(abs(S(f_min_index:f_max_index,:))));
+    axis xy; % Inverter o eixo y para corresponder à representação usual do espectrograma
     xlabel('Tempo (s)');
     ylabel('Frequência (Hz)');
     title('Espectrograma');
-    colorbar; % Adiciona uma barra de cores
+    %colorbar; % Adiciona uma barra de cores
     
     fft_audio = fft(y);
     % Calcular o vetor de frequências correspondentes
@@ -60,7 +72,7 @@ while true
     subplot(4, 1, 2);
     % Plotar o espectro de frequência
     %plot(frequencies, abs(fft_audio));
-    stem(frequencies, abs(fftshift(fft_audio)), '.');
+    stem(frequencies - fs/2, fftshift(abs(fft_audio)), '.');
     xlabel('Frequência (Hz)');
     ylabel('Magnitude');
     title('Espectro de Frequência do Sinal de Áudio em Tempo Real');
@@ -91,4 +103,5 @@ while true
     text(0.5, 0.9, sprintf('Frequência encontrada: %.2f Hz', max_frequency), 'Color', 'red', 'FontSize', 12, 'HorizontalAlignment', 'center', 'Units', 'normalized');
     
     pause(1); % Aguardar 1 segundo antes da próxima gravação
+    break;
 end
